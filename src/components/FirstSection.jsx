@@ -7,7 +7,7 @@ function FirstSection() {
       const data = await fetch("http://fakestoreapi.com/products").then(
         (response) => response.json()
       );
-
+      console.log(data)
       setProducts(data);
     };
     getData();
