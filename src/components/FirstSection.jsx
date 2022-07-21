@@ -2,16 +2,11 @@ import Product from "./Product";
 import { useState, useEffect } from "react";
 function FirstSection() {
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      const data = await fetch("http://fakestoreapi.com/products").then(
-        (response) => response.json()
-      );
-      console.log(data)
-      setProducts(data);
-    };
-    getData();
-  });
+  useEffect( () => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  },[])
 
   return (
     <section className="bg-white py-8">
