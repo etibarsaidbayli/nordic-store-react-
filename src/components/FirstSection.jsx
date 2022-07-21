@@ -1,19 +1,17 @@
 import Product from "./Product";
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from "react";
 function FirstSection() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetch("http://fakestoreapi.com/products").then(
+        (response) => response.json()
+      );
 
-    useEffect(() => {
-        const getData = async () => {
-            const data=await fetch('http://fakestoreapi.com/products').then(response=>response.json())
-            // console.log(data)
-            setProducts(data)
-        }
-        getData()
-    },[])
-
-    const [products,setProducts] = useState([])
-
-
+      setProducts(data);
+    };
+    getData();
+  });
 
   return (
     <section className="bg-white py-8">
@@ -60,13 +58,8 @@ function FirstSection() {
             </div>
           </div>
         </nav>
-        {products.map((a,b)=> (
-            <Product
-            key={a.id}
-            title={a.title}
-            price={a.price}
-            image={a.image}
-            />
+        {products.map((a, b) => (
+          <Product key={a.id} title={a.title} price={a.price} image={a.image} />
         ))}
       </div>
     </section>
